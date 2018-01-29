@@ -33,6 +33,7 @@ class HashMap {
     for (let i=start; i < start + this._capacity; i++) {
       const index = i % this._capacity;
       const slot = this._slots[index];
+      //open addressing
       if (slot === undefined || (slot.key === key && !slot.deleted)) {
         return index;
       } 
@@ -89,18 +90,18 @@ HashMap.SIZE_RATIO = 3;
 let lor = new HashMap;
 
 lor.set('Hobbit', 'Bilbo');
-lor.set('Hobbit', 'Frodo');
+lor.set('Hobbit2', 'Frodo');
 lor.set('Wizard', 'Gandolf');
 lor.set('Human', 'Aragon');
 lor.set('Elf', 'Legolas');
 lor.set('Maiar', 'The Necromancer');
-lor.set('Maiar', 'Sauron');
+lor.set('Maiar2', 'Sauron');
 lor.set('RingBearer', 'Gollum');
 lor.set('LadyOfLight', 'Galadriel');
 lor.set('HalfElven', 'Arwen');
 lor.set('Ent', 'Treebeard');
 
-
-console.log('Lor hashmap>>', lor._slots);
+console.log(lor.get('Maiar'));
+// console.log('Lor hashmap>>', lor._slots);
 // console.log('Lor slot Hobbit>>', lor._findSlot('Hobbit'));
-console.log('Get hobbit>>>>', lor.get('Hobbit'));
+// console.log(lor);
