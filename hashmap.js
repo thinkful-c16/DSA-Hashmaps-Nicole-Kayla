@@ -11,7 +11,7 @@ class HashMap {
   get(key) {
     const index = this._findSlot(key);
     if (this._slots[index] === undefined) {
-      throw new Error('Key error');
+      return false;
     }
     return this._slots[index].value;
     
@@ -109,11 +109,44 @@ lor.set('Ent', 'Treebeard');
 let _string = new HashMap;
 
 function palindrome(string){
-  for (let i=0; i < string.length; i++){
-    _string.set(i, string[i]);
-    _string.get(i);
-    string[i] === string[i];
+  let count = 0;
+
+  // for (let i=0; i< string.length; i++) {
+  //   _string.set(i, string[i]);
+  // }
+
+  for (let i=0; i < string.length; i++) {
+    if (!_string.get(string[i])) {
+      _string.set(string[i], 1);
+
+    } else {
+      _string.set(string[i], _string.get(string[i])+1);
+    }
+    
+
+
+    // else {
+    //   _string.set(i, string[i]);
+    // }
+    // let letter = _string.get(i);
+    // console.log(letter);
+    // if (letter )
+    // letterCounts[letter] = letterCounts[letter] || 0;
+    // letterCounts[letter]++;
+    // console.log('letterCounts[letter]>>>>', letterCounts[letter]);
+    // return _string.get(i);
+
+
   }
+  // for (let letterCount in letterCounts) {
+  //   console.log('Palinsum', palinSum);
+  //   palinSum += letterCounts[letterCount] % 2;
+  // }
+  // return palinSum < 2;
+  console.log(_string);
+  // return count;
+
+
 }
 
-palindrome('racecar');
+console.log(palindrome('racecar'));
