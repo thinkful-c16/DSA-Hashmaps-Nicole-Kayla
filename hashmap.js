@@ -5,6 +5,7 @@ class HashMap {
     this.length = 0;
     this._slots = [];
     this._capacity = initialCapacity;
+    this._deleted = 0;
   }
 
   static _hashString(string) {
@@ -23,7 +24,7 @@ class HashMap {
     for (let i=start; i < start.length; i++) {
       const index = i % this._capacity;
       const slot = this._slots[index];
-      if (slot === undefined || slot.key === key) {
+      if (slot === undefined || (slot.key === key && !slot.deleted)) {
         return index;
       } 
     }
@@ -39,12 +40,41 @@ class HashMap {
     //if the slot is not undefined, _findSlot(key) to find empty slot
     this._slots[index] = {
       key, 
-      value
+      value,
+      deleted: false
     };
     this.length++;
+
   }
 
+  _resize(size) {
+    const oldSlots = this._slots;
+    this._capacity = size;
+    this.length = 0;
+    this._deleted = 0;
+    this._slots = [];
+
+    for(const slot of oldSlots) {
+      if (slot !== undefined && !slot.deleted) {
+        this.set(slot.key, slot.value);
+      }
+    }
+  }
+
+  remove(key) {
+    const index = this._findSlot(key);
+    const slot = this._slots[index];
+    if (slot === undefined) {
+      throw new Error('Key error');
+    }
+    slot.deleted = true;
+    this.length--;
+    this._deleted++;
+  }
 
 }
+
+HashMap.MAX_LOAD_RATIO = 0.9;
+HashMap.SIZE_RATIO = 3;
 
 let lor = new HashMap;
