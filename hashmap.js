@@ -101,7 +101,19 @@ lor.set('LadyOfLight', 'Galadriel');
 lor.set('HalfElven', 'Arwen');
 lor.set('Ent', 'Treebeard');
 
-console.log(lor.get('Maiar'));
+// console.log(lor.get('Maiar'));
 // console.log('Lor hashmap>>', lor._slots);
 // console.log('Lor slot Hobbit>>', lor._findSlot('Hobbit'));
 // console.log(lor);
+
+let _string = new HashMap;
+
+function palindrome(string){
+  for (let i=0; i < string.length; i++){
+    _string.set(i, string[i]);
+    _string.get(i);
+    string[i] === string[i];
+  }
+}
+
+palindrome('racecar');
